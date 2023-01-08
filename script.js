@@ -88,25 +88,64 @@ let upperCasedCharacters = [
   'Z'
 ];
 
+
 // Function to prompt user for password options
+let passwordOptions = { };
 function getPasswordOptions() {
-
   
-
-
+  passwordOptions.length = prompt('Enter the length of password you require (10-64 digits):');
+  passwordOptions.upperCase = confirm('Do you require your password to have upper case charachters?');
+  passwordOptions.lowerCase = confirm('Do you require your password to have lower case charachters? ');
+  passwordOptions.numChar = confirm('Do you require your password to have numbers?');
+  passwordOptions.specialChar = confirm('Do you require your password to have special charachters?');
+  
+  return passwordOptions;
 };
+ 
+// console.log(passwordOptions)
 
 // Function for getting a random element from an array
+
 function getRandom(arr) {
+  let randomIndex = Math.floor(Math.random()*arr.length);
+  console.log(arr[randomIndex])
+  return arr[randomIndex]
+
 
 
 }
 
 // Function to generate password with user input
+
+let mainArray = [];
+let generatedPassword = '';
+
 function generatePassword() {
+  // making an array of all the selected options
+  let passwordOptions = getPasswordOptions()
+  if (passwordOptions.upperCase) {
+    mainArray = mainArray.concat(upperCasedCharacters);
+  }
+  if (passwordOptions.lowerCase) {
+    mainArray = mainArray.concat(lowerCasedCharacters);
+  }
+  if (passwordOptions.numChar) {
+    mainArray = mainArray.concat(numericCharacters);
+  }
+  if (passwordOptions.specialChar) {
+    mainArray = mainArray.concat(specialCharacters);
+  }
+  
+  for (let i = 0;  i < passwordOptions.length; i++) {
+    generatedPassword+=getRandom(mainArray);
+  }
+console.log(mainArray);  
+console.log(generatedPassword);
+return  generatedPassword;
 
 }
-
+// console.log(mainArray);
+// console.log(generatedPassword);
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
@@ -120,6 +159,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
-
 
 
