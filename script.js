@@ -92,8 +92,17 @@ let upperCasedCharacters = [
 // Function to prompt user for password options
 let passwordOptions = { };
 function getPasswordOptions() {
+
+  while (true){
+    passwordOptions.length = prompt('Enter the length of password you require (10-64 digits):');
+    if (passwordOptions.length >=10 && passwordOptions.length <=64) {
+      break;
+    }else {
+      alert(`You must enter a number between 10 and 64: `);
+    }
+
+  }
   
-  passwordOptions.length = prompt('Enter the length of password you require (10-64 digits):');
   passwordOptions.upperCase = confirm('Do you require your password to have upper case charachters?');
   passwordOptions.lowerCase = confirm('Do you require your password to have lower case charachters? ');
   passwordOptions.numChar = confirm('Do you require your password to have numbers?');
@@ -117,11 +126,13 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 
-let mainArray = [];
-let generatedPassword = '';
+
+
 
 function generatePassword() {
   // making an array of all the selected options
+  let mainArray = [];
+  let generatedPassword = '';
   let passwordOptions = getPasswordOptions()
   if (passwordOptions.upperCase) {
     mainArray = mainArray.concat(upperCasedCharacters);
@@ -140,7 +151,7 @@ function generatePassword() {
     generatedPassword+=getRandom(mainArray);
   }
 console.log(mainArray);  
-console.log(generatedPassword);
+// console.log(generatedPassword);
 return  generatedPassword;
 
 }
